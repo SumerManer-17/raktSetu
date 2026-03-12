@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RaktSetu — Blood Donor Emergency Matcher</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .hero {
+      background: linear-gradient(135deg, #CC0000 0%, #1F4E79 100%);
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+    }
+    .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 16px; }
+    .hero p  { font-size: 20px; opacity: 0.9; margin-bottom: 36px; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .hero-btns .btn { padding: 14px 32px; font-size: 16px; }
+    .btn-white { background: white; color: var(--red); }
+    .btn-white:hover { background: #f0f0f0; color: var(--red-dark); }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      padding: 60px 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: 12px;
+      padding: 28px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      border-top: 4px solid var(--red);
+    }
+
+    .feature-card .icon { font-size: 40px; margin-bottom: 14px; }
+    .feature-card h3 { color: var(--navy); font-size: 18px; margin-bottom: 10px; }
+    .feature-card p { color: var(--gray); font-size: 14px; line-height: 1.7; }
+
+    .how-it-works {
+      background: var(--navy-light);
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .how-it-works h2 {
+      font-size: 28px;
+      color: var(--navy);
+      margin-bottom: 40px;
+    }
+
+    .steps {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .step {
+      background: white;
+      border-radius: 12px;
+      padding: 24px 20px;
+      width: 200px;
+      box-shadow: var(--shadow);
+    }
+
+    .step .step-num {
+      width: 40px;
+      height: 40px;
+      background: var(--red);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      margin: 0 auto 12px;
+    }
+
+    .step p { font-size: 14px; color: var(--gray); }
+
+    .cta {
+      background: var(--red);
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .cta h2 { font-size: 30px; margin-bottom: 12px; }
+    .cta p  { font-size: 16px; opacity: 0.9; margin-bottom: 28px; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <div class="navbar">
+    <div class="logo">🩸 Rakt<span>Setu</span></div>
+    <nav>
+      <a href="index.html" class="active">Home</a>
+      <a href="register.html">Become Donor</a>
+      <a href="emergency.html">Emergency</a>
+      <a href="map.html">Live Map</a>
+      <a href="dashboard.html">My Profile</a>
+    </nav>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>🩸 RaktSetu</h1>
+    <p>India's smartest blood donor emergency matcher. Real donors. Real availability. Real time.</p>
+    <div class="hero-btns">
+      <a href="register.html" class="btn btn-white">Become a Donor</a>
+      <a href="emergency.html" class="btn btn-outline" style="border-color:white; color:white;">Post Emergency</a>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="features">
+    <div class="feature-card">
+      <div class="icon">✅</div>
+      <h3>Always Fresh Data</h3>
+      <p>Donors are pinged every 30 days to confirm availability. No more calling inactive numbers.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">📍</div>
+      <h3>Nearest First</h3>
+      <p>GPS-based matching finds the closest eligible donor to your hospital in seconds.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">📱</div>
+      <h3>WhatsApp Alerts</h3>
+      <p>Donors get instant WhatsApp alerts. No new app needed. Works on any phone.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🔄</div>
+      <h3>Auto-Expand Search</h3>
+      <p>No response in 10 minutes? System automatically widens radius and alerts more donors.</p>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="how-it-works">
+    <h2>How RaktSetu Works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <p>Donor registers with blood group and location</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <p>Emergency posted with hospital and blood group needed</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <p>5 nearest eligible donors get WhatsApp alert instantly</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <p>Donor replies HELP → Requester gets contact immediately</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <h2>Someone Needs Blood Right Now</h2>
+    <p>Register as a donor today. It takes 2 minutes and can save a life.</p>
+    <a href="register.html" class="btn btn-white">Register as Donor →</a>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile — RaktSetu</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="logo">🩸 Rakt<span>Setu</span></div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="register.html">Become Donor</a>
+      <a href="emergency.html">Emergency</a>
+      <a href="map.html">Live Map</a>
+      <a href="dashboard.html" class="active">My Profile</a>
+    </nav>
+  </div>
+
+  <div class="container" style="max-width:640px;">
+    <div class="page-title">My Donor Profile</div>
+    <div class="page-subtitle">View your donation history and manage your availability.</div>
+
+    <!-- LOOKUP FORM -->
+    <div class="card" id="lookupCard">
+      <div class="card-title">Find Your Profile</div>
+      <div class="form-group">
+        <label>Enter your registered mobile number</label>
+        <input type="tel" id="lookupPhone" placeholder="9876543210" maxlength="10">
+      </div>
+      <button class="btn btn-red btn-full" onclick="loadProfile()">View My Profile</button>
+      <div class="alert alert-error" id="lookupError" style="margin-top:12px;"></div>
+    </div>
+
+    <!-- PROFILE CARD — hidden until loaded -->
+    <div id="profileSection" style="display:none;">
+
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+          <div>
+            <div style="font-size:22px; font-weight:700;" id="donorName">—</div>
+            <div style="color:var(--gray); font-size:14px;" id="donorPhone">—</div>
+          </div>
+          <span class="blood-badge" id="donorBlood">—</span>
+        </div>
+
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-number" id="totalDonations">0</div>
+            <div class="stat-label">Total Donations</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="daysUntilEligible">—</div>
+            <div class="stat-label">Days Until Eligible</div>
+          </div>
+        </div>
+
+        <div style="font-size:14px; margin-bottom:8px;">
+          <strong>Status:</strong> <span id="donorStatus">—</span>
+        </div>
+        <div style="font-size:14px; margin-bottom:8px;">
+          <strong>Freshness:</strong> <span id="donorFreshness">—</span>
+        </div>
+        <div style="font-size:14px; margin-bottom:16px;">
+          <strong>Next Eligible:</strong> <span id="nextEligible">—</span>
+        </div>
+
+        <button class="btn btn-outline" onclick="toggleStatus()" id="toggleBtn">
+          Pause My Availability
+        </button>
+      </div>
+
+      <!-- DONATION HISTORY -->
+      <div class="card">
+        <div class="card-title">Donation History</div>
+        <div id="historyContent">
+          <p style="color:var(--gray); font-size:14px;">No donation history yet.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel — RaktSetu</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="logo">🩸 Rakt<span>Setu</span></div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="admin.html" class="active">Admin</a>
+      <a href="map.html">Live Map</a>
+    </nav>
+  </div>
+
+  <div class="container">
+    <div class="page-title">Admin Dashboard</div>
+    <div class="page-subtitle">Overview of all donors, requests, and system performance.</div>
+
+    <!-- STATS -->
+    <div class="stat-grid" id="statsGrid">
+      <div class="stat-card"><div class="stat-number" id="totalDonors">—</div><div class="stat-label">Total Donors</div></div>
+      <div class="stat-card"><div class="stat-number" id="activeDonors">—</div><div class="stat-label">Active Donors</div></div>
+      <div class="stat-card"><div class="stat-number" id="openRequests">—</div><div class="stat-label">Open Requests</div></div>
+      <div class="stat-card"><div class="stat-number" id="fulfilledReqs">—</div><div class="stat-label">Fulfilled</div></div>
+      <div class="stat-card"><div class="stat-number" id="totalDonations">—</div><div class="stat-label">Total Donations</div></div>
+      <div class="stat-card"><div class="stat-number" id="responseRate">—</div><div class="stat-label">Response Rate</div></div>
+    </div>
+
+    <!-- BLOOD GROUP STATS -->
+    <div class="card">
+      <div class="card-title">Donors by Blood Group</div>
+      <div class="table-wrap">
+        <table id="bloodGroupTable">
+          <tr><th>Blood Group</th><th>Total Donors</th><th>Active Donors</th></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- ALL DONORS -->
+    <div class="card">
+      <div class="card-title">All Donors</div>
+      <div class="table-wrap">
+        <table id="donorsTable">
+          <tr><th>Name</th><th>Phone</th><th>Blood Group</th><th>City</th><th>Status</th></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- ALL REQUESTS -->
+    <div class="card">
+      <div class="card-title">All Emergency Requests</div>
+      <div class="table-wrap">
+        <table id="requestsTable">
+          <tr><th>ID</th><th>Requester</th><th>Blood Group</th><th>Hospital</th><th>Status</th><th>Date</th></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/api.js"></script>
+  <script>
+    async function loadAdmin() {
+      // Load stats
+      const stats = await AdminAPI.getStats();
+      if (stats.success) {
+        const d = stats.data;
+        document.getElementById("totalDonors").textContent    = d.donors.total;
+        document.getElementById("activeDonors").textContent   = d.donors.active;
+        document.getElementById("openRequests").textContent   = d.requests.open;
+        document.getElementById("fulfilledReqs").textContent  = d.requests.fulfilled;
+        document.getElementById("totalDonations").textContent = d.performance.total_donations;
+        document.getElementById("responseRate").textContent   = d.performance.donor_response_rate;
+      }
+
+      // Load blood group stats
+      const bgStats = await AdminAPI.getBloodGroups();
+      if (bgStats.success) {
+        const table = document.getElementById("bloodGroupTable");
+        bgStats.data.forEach(row => {
+          table.innerHTML += `<tr>
+            <td><span class="blood-badge">${row.blood_group}</span></td>
+            <td>${row.total}</td>
+            <td>${row.active}</td>
+          </tr>`;
+        });
+      }
+
+      // Load all donors
+      const donors = await AdminAPI.getAllDonors();
+      if (donors.success) {
+        const table = document.getElementById("donorsTable");
+        donors.data.forEach(d => {
+          table.innerHTML += `<tr>
+            <td>${d.name}</td>
+            <td>${d.phone}</td>
+            <td><span class="blood-badge">${d.blood_group}</span></td>
+            <td>${d.city || "—"}</td>
+            <td><span class="badge ${d.is_active ? 'badge-active' : 'badge-inactive'}">${d.is_active ? 'Active' : 'Inactive'}</span></td>
+          </tr>`;
+        });
+      }
+
+      // Load all requests
+      const requests = await AdminAPI.getAllRequests();
+      if (requests.success) {
+        const table = document.getElementById("requestsTable");
+        requests.data.forEach(r => {
+          table.innerHTML += `<tr>
+            <td>#${r.id}</td>
+            <td>${r.requester_name}</td>
+            <td><span class="blood-badge">${r.blood_group}</span></td>
+            <td>${r.hospital_name}</td>
+            <td><span class="badge badge-${r.status}">${r.status}</span></td>
+            <td>${new Date(r.created_at).toLocaleDateString("en-IN")}</td>
+          </tr>`;
+        });
+      }
+    }
+
+    loadAdmin();
+  </script>
+</body>
+</html>
